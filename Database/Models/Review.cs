@@ -2,7 +2,7 @@
 
 namespace Database.Models;
 
-public class Review
+public class Review : Entity
 {
     public virtual Game Game { get; set; }
     public virtual User User { get; set; }
@@ -15,9 +15,11 @@ public class ReviewMap : ClassMap<Review>
 {
     public ReviewMap() 
     {
-        CompositeId()
-            .KeyReference(x => x.Game)
-            .KeyReference(x => x.User);
+        Id(x => x.Id).GeneratedBy.Guid();
+
+
+        References(x => x.Game).UniqueKey("game_user");
+        References(x => x.User).UniqueKey("game_user");
 
         Map(x => x.Text);
         Map(x => x.Rating);
