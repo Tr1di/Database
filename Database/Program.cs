@@ -8,7 +8,7 @@ using var sessionFactory = Fluently.Configure()
         .ConnectionString("Data Source=Library.sqlite")
     )
     .Mappings(x => x.FluentMappings
-        .Add<GameMap>()
+        .AddFromAssemblyOf<GameMap>()
     )
     .ExposeConfiguration(
         cfg => new SchemaExport(cfg)
