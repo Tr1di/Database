@@ -26,15 +26,11 @@ public partial class Form1 : Form
         InitializeComponent();
 
         sessionFactory = Fluently.Configure()
-            .Database(SQLiteConfiguration.Standard
-                .ConnectionString("Data Source=Library.sqlite")
+            .Database(PostgreSQLConfiguration.PostgreSQL82
+                .ConnectionString("host=pibikidokos.beget.app;port=5432;sslmode=disable;database=steam;username=tridi;password=v3k&dKVn5vAm")
             )
             .Mappings(x => x.FluentMappings
                 .AddFromAssemblyOf<GameMap>()
-            )
-            .ExposeConfiguration(
-                cfg => new SchemaExport(cfg)
-                    .Create(false, true)
             )
             .BuildConfiguration()
             .BuildSessionFactory();
