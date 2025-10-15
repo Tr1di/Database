@@ -26,7 +26,7 @@ public partial class Form1 : Form
         InitializeComponent();
 
         sessionFactory = Fluently.Configure()
-            .Database(PostgreSQLConfiguration.Standard
+            .Database(PostgreSQLConfiguration.PostgreSQL83
                 .ConnectionString("host=185.236.64.36;port=5432;sslmode=disable;database=test;username=anteydevuser;password=eaAs8FuJnUDDcGXC")
             )
             .Mappings(x => x.FluentMappings
