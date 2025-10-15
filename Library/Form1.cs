@@ -26,11 +26,14 @@ public partial class Form1 : Form
         InitializeComponent();
 
         sessionFactory = Fluently.Configure()
-            .Database(PostgreSQLConfiguration.PostgreSQL82
-                .ConnectionString("host=pibikidokos.beget.app;port=5432;sslmode=disable;database=steam;username=tridi;password=v3k&dKVn5vAm")
+            .Database(PostgreSQLConfiguration.Standard
+                .ConnectionString("host=185.236.64.36;port=5432;sslmode=disable;database=test;username=anteydevuser;password=eaAs8FuJnUDDcGXC")
             )
             .Mappings(x => x.FluentMappings
                 .AddFromAssemblyOf<GameMap>()
+            )
+            .ExposeConfiguration(
+                cfg => new SchemaExport(cfg).Execute(false, true, false)
             )
             .BuildConfiguration()
             .BuildSessionFactory();
