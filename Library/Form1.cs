@@ -1,6 +1,7 @@
 using Database.Models;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using Library.Repository;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 
@@ -38,6 +39,9 @@ public partial class Form1 : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
-        new GameCreateForm(Session).Show();
+        new GameCreateForm(
+            new NHibernateRepository<Game>(Session),
+            new NHibernateUnitOfWork(Session)
+        ).Show();
     }
 }

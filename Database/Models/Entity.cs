@@ -1,6 +1,6 @@
 ﻿namespace Database.Models;
 
-public class Entity
+public abstract class Entity
 {
     public virtual Guid Id { get; set; }
 }

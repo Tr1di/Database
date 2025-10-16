@@ -1,19 +1,39 @@
-﻿using NHibernate;
+﻿using Database.Models;
+using Database.Repository;
 
 namespace Library;
 
 public partial class GameCreateForm : Form
 {
-    private readonly ISession session;
+    private readonly IRepository<Game> repository;
+    private readonly IUnitOfWork unitOfWork;
 
-    public GameCreateForm(ISession session)
+    public GameCreateForm(
+        IRepository<Game> repository,
+        IUnitOfWork unitOfWork
+    )
     {
         InitializeComponent();
-        this.session = session;
+        this.repository = repository;
+        this.unitOfWork = unitOfWork;
     }
 
     private void label1_Click(object sender, EventArgs e)
     {
+        try
+        {
+            unitOfWork.Begin();
 
+            repository.SaveOrUpdate(new Game
+            {
+                Title = "123"
+            });
+
+            unitOfWork.Commit();
+        }
+        catch (Exception ex)
+        {
+            unitOfWork.Rollback();
+        }
     }
 }
